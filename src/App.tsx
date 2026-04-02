@@ -545,7 +545,6 @@ export const App = () => {
                               <dt className="bold">
                                 ELD'SIGN ENTREPRISE
                                 <br />
-                                Aucune adresse postale n’est indiquée sur nos supports (indicatif +221).
                               </dt>
                               <dd>
                                 <span>Infoline :</span>
