@@ -1,0 +1,9 @@
+node_modules
+dist
+*.tsbuildinfo
+*.local
+.DS_Store
+.env.test
+.env.prod
+.env.local
+Assets/document eldsign/

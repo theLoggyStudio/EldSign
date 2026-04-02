@@ -1,0 +1,5 @@
+List of Fonts used in template 
+
+Droid sans	http://www.google.com/webfonts/specimen/Droid+Sans
+Anton		http://www.google.com/webfonts/family?family=Anton&subset=latin
+Oswald		http://www.google.com/webfonts/family?family=Oswald&subset=latin

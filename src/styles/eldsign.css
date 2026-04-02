@@ -1,0 +1,1409 @@
+/* Dérivé du template templates/site (reset + layout + grilles 8 cols) */
+html,
+body,
+div,
+span,
+h1,
+h2,
+h3,
+p,
+a,
+img,
+ul,
+li,
+article,
+aside,
+footer,
+nav,
+header,
+dl,
+dt,
+dd,
+pre {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+article,
+aside,
+footer,
+header,
+nav {
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  border: 0;
+  vertical-align: top;
+  max-width: 100%;
+  height: auto;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  min-width: 940px;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: #111;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 100%;
+  line-height: 1em;
+  color: #000;
+  height: 100%;
+  overflow: hidden;
+}
+
+#root {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Panneaux : assombrissement modéré. Fond photo : teinte plus légère (clics traversent #glob sauf UI). */
+:root {
+  --eldsign-content-surface: linear-gradient(
+    165deg,
+    rgba(0, 0, 0, 0.72) 0%,
+    rgba(28, 28, 32, 0.82) 100%
+  );
+  /* Voile très léger sur la photo — lisibilité UI sans assombrir fort */
+  --eldsign-bg-photo-tint: linear-gradient(
+    165deg,
+    rgba(0, 0, 0, 0.05) 0%,
+    rgba(10, 12, 16, 0.09) 100%
+  );
+  --eldsign-sidebar-gutter: 36px;
+  --eldsign-sidebar-w: 301px;
+  --eldsign-sidebar-col: calc(var(--eldsign-sidebar-gutter) + var(--eldsign-sidebar-w));
+  --eldsign-footer-h: 43px;
+  --eldsign-panel-pad-top: clamp(56px, 10vh, 128px);
+  --eldsign-panel-pad-bottom: 16px;
+  --eldsign-panel-pad-x: clamp(12px, 2.5vw, 28px);
+  --eldsign-panel-max-w: 620px;
+}
+
+a {
+  color: #f00;
+  outline: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+p,
+.blo {
+  line-height: 20px;
+  margin-bottom: 20px;
+}
+
+/*
+ * Scroll interne : footer en bas. pointer-events: none sur #glob pour que les clics
+ * atteignent #bgStretch (mode immersif) ; seuls aside, panneau et footer captent les clics.
+ */
+#glob {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  min-width: 940px;
+  min-height: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  font: 13px/20px Arial, Helvetica, sans-serif;
+  color: #fff;
+  pointer-events: none;
+}
+
+/* Grille latérale + zone contenu : au moins une hauteur d’écran ; le footer est sous ce bloc */
+.eld-main-sheet {
+  display: grid;
+  grid-template-columns: var(--eldsign-sidebar-col) minmax(0, 1fr);
+  grid-template-rows: minmax(100vh, auto);
+  align-items: stretch;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.eld-main-sheet > aside,
+.eld-main-sheet > article {
+  min-height: 0;
+}
+
+.eld-main-sheet > aside {
+  pointer-events: auto;
+}
+
+#gspinner {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+#gspinner::after {
+  content: '';
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: eldspin 0.8s linear infinite;
+}
+
+@keyframes eldspin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Panneau latéral : colonne grille + flex pour éviter chevauchement logo / nav / vignettes */
+.eld-main-sheet > aside {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: start;
+  width: var(--eldsign-sidebar-w);
+  margin-left: var(--eldsign-sidebar-gutter);
+  position: relative;
+  left: 0;
+  top: 0;
+  height: 100%;
+  max-height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.88) 0%,
+    rgba(25, 25, 25, 0.94) 45%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+  box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.06);
+}
+
+.eldsign-logo {
+  position: relative;
+  left: 9px;
+  top: 0;
+  margin-top: clamp(40px, 9vh, 100px);
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.eldsign-logo__link {
+  text-decoration: none;
+  display: block;
+  line-height: 0;
+}
+
+.eldsign-logo__img {
+  display: block;
+  width: auto;
+  max-width: min(210px, 72vw);
+  height: auto;
+  max-height: 72px;
+  object-fit: contain;
+}
+
+nav {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin-top: clamp(20px, 3.5vh, 40px);
+  flex-shrink: 0;
+  text-align: center;
+}
+
+nav > ul > li {
+  display: block;
+  width: 100%;
+}
+
+nav > ul > li > a {
+  font-family: Oswald, sans-serif;
+  font-size: clamp(24px, 2.6vw, 33px);
+  line-height: clamp(40px, 6.5vh, 55px);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+  position: relative;
+  display: inline-block;
+}
+
+nav > ul > li > a > span {
+  position: absolute;
+  border-bottom: 1px #000 solid;
+  border-top: 1px #fff solid;
+  width: 0%;
+  bottom: 4px;
+  right: 0;
+  left: auto;
+  transition: width 0.3s ease-out, left 0.3s ease-out, right 0.3s ease-out;
+}
+
+nav > ul > li > a:hover > span,
+nav > ul > li.active > a > span {
+  width: 100%;
+  left: 0;
+  right: auto;
+}
+
+/* Occupe l’espace vertical sous le menu pour pousser BackgroundThumbPager en bas du aside */
+.eld-sidebar-spacer {
+  flex: 1 1 0;
+  min-height: 0;
+}
+
+/* Bloc vignettes : sous le spacer, ancré en bas de la colonne latérale */
+.bg-thumb-pager-root {
+  flex-shrink: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.bg-thumb-pager {
+  position: relative;
+  left: 0;
+  margin-bottom: clamp(12px, 2.5vh, 28px);
+  padding-left: 12px;
+  padding-right: 8px;
+  max-width: 260px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.bg-thumb-pager__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-right: 2px;
+}
+
+.bg-thumb-pager__arrow {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.bg-thumb-pager__arrow:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.bg-thumb-pager__arrow:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.bg-thumb-pager__dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: 1;
+  min-height: 28px;
+}
+
+.bg-thumb-pager__dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.28);
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.bg-thumb-pager__dot:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.bg-thumb-pager__dot.is-active {
+  background: #fff;
+  transform: scale(1.15);
+}
+
+.bg-thumb-pager .bg-thumbs {
+  position: static;
+  left: auto;
+  bottom: auto;
+}
+
+.bg-thumbs {
+  position: absolute;
+  left: 24px;
+  bottom: 74px;
+}
+
+.bg-thumbs ul {
+  margin-left: -18px;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 260px;
+}
+
+.bg-thumbs li {
+  float: left;
+  margin-left: 18px;
+  margin-bottom: 16px;
+}
+
+.bg-thumbs li a {
+  display: block;
+  position: relative;
+  width: 52px;
+  height: 36px;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+.bg-thumbs li a > span {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.35);
+  opacity: 1;
+  transition: opacity 0.3s ease-out;
+  pointer-events: none;
+}
+
+.bg-thumbs li a:hover > span,
+.bg-thumbs li.active a > span {
+  opacity: 0;
+}
+
+.bg-thumb-preview {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Grille (templates/site/css/grid.css — extraits utiles) */
+.container_8 {
+  margin-left: auto;
+  margin-right: auto;
+  width: 640px;
+}
+
+/* Zone principale : pleine largeur de la colonne (plus de 640px figé qui coupait le panneau) */
+.eld-main-sheet > #content.container_8 {
+  position: relative;
+  grid-column: 2;
+  grid-row: 1;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  min-width: 0;
+  height: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  /* Laisse passer les clics vers l’arrière-plan sauf sur le panneau (#content-panel-wrap) */
+  pointer-events: none;
+}
+
+.grid_6 {
+  display: inline;
+  float: left;
+  position: relative;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 460px;
+}
+
+.prefix_1 {
+  padding-left: 80px;
+}
+
+.alpha {
+  margin-left: 0;
+}
+
+.omega {
+  margin-right: 0;
+}
+
+#content > ul {
+  position: relative;
+}
+
+/* Panneau NavItemModal aligné à droite de la colonne principale */
+#content-panel-wrap {
+  position: absolute;
+  right: var(--eldsign-panel-pad-x);
+  left: auto;
+  top: var(--eldsign-panel-pad-top);
+  width: min(var(--eldsign-panel-max-w), calc(100% - 2 * var(--eldsign-panel-pad-x)));
+  max-width: var(--eldsign-panel-max-w);
+  height: calc(
+    100% - var(--eldsign-panel-pad-top) - var(--eldsign-panel-pad-bottom)
+  );
+  overflow: hidden;
+  box-sizing: border-box;
+  pointer-events: auto;
+}
+
+#content > ul > li.panel-base,
+.content-panel {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  box-sizing: border-box;
+  background: var(--eldsign-content-surface);
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding-top: 42px;
+  padding-left: 0;
+  padding-right: 0;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.content-panel.nav-item-modal {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 14px;
+}
+
+.nav-item-modal__scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+h2 {
+  font: 42px/1.2em Anton, sans-serif;
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+#about_us .cols {
+  margin-left: -20px;
+  overflow: hidden;
+}
+
+#about_us .cols li {
+  margin-left: 20px;
+  float: left;
+}
+
+#about_us .cols li .about-img-ph {
+  width: 130px;
+  height: 86px;
+  border-radius: 2px;
+  background-size: cover;
+  background-position: center;
+}
+
+#about_us .about-page__strip {
+  margin: 8px 0 12px -20px;
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+}
+
+#about_us .about-page__strip li {
+  margin-left: 20px;
+  margin-bottom: 12px;
+  float: left;
+}
+
+#about_us .about-page__strip .about-page__figure {
+  margin: 0;
+  width: 140px;
+  height: 92px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.32);
+}
+
+#about_us .about-page__strip .about-page__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Grille 460px levée à l’intérieur du panneau formations (meilleure largeur pour le texte) */
+#formations .grid_6.prefix_1.alpha.omega {
+  float: none;
+  display: block;
+  width: calc(100% - 48px);
+  max-width: none;
+  margin-left: 24px;
+  margin-right: 24px;
+  padding-left: 0;
+  box-sizing: border-box;
+}
+
+/* Liste formations : une colonne, chaque ligne = image gauche + texte droite */
+#formations .formation-articles-list {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+#formations .formation-articles-list > li {
+  float: none;
+  margin: 0;
+  width: 100%;
+}
+
+#formations .article-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 14px 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+#formations .article-row--clickable {
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+#formations .article-row--clickable:hover {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+#formations .article-row--clickable:focus-visible {
+  outline: 2px solid rgba(201, 245, 98, 0.85);
+  outline-offset: 2px;
+}
+
+/* Hauteur fixe 200px ; largeur 300px (ratio 3:2) */
+#formations .article-row__media {
+  flex-shrink: 0;
+  height: 200px;
+  width: 300px;
+  box-sizing: border-box;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.45);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+#formations .article-row__media .eld-nav-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+#formations .article-row__body {
+  flex: 1;
+  min-width: 0;
+  padding-top: 2px;
+}
+
+#formations .article-row__title {
+  font-family: Oswald, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-transform: none;
+  color: #fff;
+  margin: 0 0 8px;
+  letter-spacing: 0.02em;
+}
+
+#formations .article-row__title-link {
+  display: block;
+  text-decoration: none;
+}
+
+#formations .article-row__title-link:hover .article-row__title {
+  color: #f55;
+}
+
+#formations .article-row__price {
+  font-family: 'Droid Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #c9f562;
+  margin: 0 0 6px;
+}
+
+#formations .article-row__meta {
+  margin: 0 0 10px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px 10px;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+#formations .article-row__meta dt {
+  margin: 0;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.7rem;
+}
+
+#formations .article-row__meta dd {
+  margin: 0;
+}
+
+#formations .article-row__details {
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+#formations .article-row__details p {
+  margin: 0 0 8px;
+}
+
+#formations .article-row__details p:last-child {
+  margin-bottom: 0;
+}
+
+#contacts .cols {
+  margin-left: -50px;
+}
+
+#contacts .cols li {
+  margin-left: 50px;
+  float: left;
+  width: 176px;
+}
+
+#glob > footer {
+  width: 100%;
+  height: var(--eldsign-footer-h);
+  min-height: var(--eldsign-footer-h);
+  background: #000;
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
+}
+
+footer .privacy {
+  position: absolute;
+  left: 121px;
+  top: 0;
+  font: 13px/43px 'Droid Sans', sans-serif;
+  color: #949394;
+}
+
+footer .soc-ico {
+  position: absolute;
+  right: 56px;
+  top: 9px;
+}
+
+footer .soc-ico li {
+  float: left;
+  margin-left: 10px;
+}
+
+footer .soc-ico li a {
+  position: relative;
+  top: 0;
+  transition:
+    top 0.3s ease-out,
+    background 0.2s ease,
+    color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.92);
+  text-decoration: none;
+}
+
+footer .soc-ico li a:hover {
+  top: -6px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+footer .soc-ico__svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+.google_map {
+  width: 460px;
+  height: 238px;
+  margin-bottom: 8px;
+  background: #222;
+  border: 0;
+}
+
+.google-map-footlink {
+  margin: 0 0 20px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.white {
+  color: #fff;
+}
+
+a.und,
+.und a {
+  text-decoration: none;
+}
+
+a.und:hover,
+.und a:hover {
+  text-decoration: underline;
+}
+
+a.nocolor,
+.nocolor a {
+  color: inherit;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+dl.address {
+  overflow: hidden;
+}
+
+dl.address dd {
+  text-align: right;
+  clear: both;
+}
+
+dl.address dd span {
+  float: left;
+}
+
+#bgStretch {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Voile visuel uniquement ; les clics passent vers .eld-bg-click-plane (z-index 1) sous #glob */
+#bgStretch::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background: var(--eldsign-bg-photo-tint);
+}
+
+/* Clic + molette sur le fond : sous #glob (z-index 2), au-dessus de #bgStretch (0) */
+.eld-bg-click-plane {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: auto;
+  cursor: pointer;
+  background: transparent;
+}
+
+.immersive-logo-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 0 0 40px 36px;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.immersive-logo-layer__img {
+  max-width: min(320px, 55vw);
+  max-height: min(200px, 28vh);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 16px 48px rgba(0, 0, 0, 0.55));
+}
+
+.immersive-logo-layer__fallback {
+  margin: 0;
+  font-family: Anton, sans-serif;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+}
+
+#bgStretch .bg-inner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+}
+
+#bgStretch .bg-layer-base {
+  z-index: 0;
+}
+
+#bgStretch .bg-layer-overlay {
+  z-index: 1;
+  pointer-events: none;
+}
+
+.home-placeholder {
+  padding-top: 2rem;
+  opacity: 0.9;
+}
+
+.home-placeholder h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Texte + images (marqueur [[IMAGE]] dans .txt — Accueil / À propos) */
+.text-image-prose {
+  white-space: pre-line;
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 1.55;
+  font-size: 0.95rem;
+}
+
+/* Titres avec icônes : ligne `::clef:: Titre` (voir ProseWithIcons.tsx) */
+.text-image-prose .prose-section {
+  margin-bottom: 0.1em;
+}
+
+.text-image-prose .prose-row--title {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0.55em 0 0.2em;
+}
+
+.text-image-prose .prose-row__title {
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.text-image-prose .prose-icon {
+  flex-shrink: 0;
+  width: 1.35em;
+  height: 1.35em;
+  margin-top: 0.14em;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.text-image-prose .prose-icon--sm {
+  width: 1.1em;
+  height: 1.1em;
+  margin-top: 0.22em;
+}
+
+.text-image-prose .prose-icon__svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.text-image-prose .prose-section__body {
+  margin: 0 0 0.55em;
+  white-space: pre-wrap;
+}
+
+.text-image-prose .prose-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin: 0.45em 0 0.6em;
+}
+
+.text-image-prose .prose-callout__text {
+  white-space: pre-wrap;
+  line-height: 1.45;
+}
+
+.text-image-prose p.prose-block {
+  margin: 0 0 0.6em;
+  white-space: pre-wrap;
+}
+
+.home-placeholder .home-acceuille__figure {
+  margin: 14px 0 22px;
+  max-width: min(520px, 100%);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.38);
+}
+
+.home-placeholder .home-acceuille__figure .eld-img-thumb-wrap,
+.about-page .about-prose__figure .eld-img-thumb-wrap {
+  width: 100%;
+  vertical-align: top;
+}
+
+.home-placeholder .home-acceuille__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: min(52vh, 320px);
+  object-fit: cover;
+  object-position: center;
+}
+
+.about-page .about-prose__figure {
+  margin: 14px 0 20px;
+  max-width: min(460px, 100%);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.32);
+}
+
+.about-page .about-prose__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: min(48vh, 280px);
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Accueil : bandeau d’images (document eldsign) */
+.home-placeholder .home-hero__strip {
+  margin: 8px 0 4px -12px;
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+}
+
+.home-placeholder .home-hero__strip li {
+  margin-left: 12px;
+  margin-bottom: 12px;
+  float: left;
+}
+
+.home-placeholder .home-hero__strip .home-hero__figure {
+  margin: 0;
+  width: 148px;
+  height: 98px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+}
+
+.home-placeholder .home-hero__strip .home-hero__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.clear {
+  clear: both;
+  line-height: 0;
+}
+
+/* Modale PayDunya — overlay flouté */
+.eld-modal-root {
+  position: fixed;
+  inset: 0;
+  z-index: 10050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.eld-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 10, 14, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.eld-modal-dialog {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 26rem;
+  max-height: min(90vh, 32rem);
+  overflow: auto;
+  border-radius: 8px;
+  background: linear-gradient(165deg, rgba(28, 32, 42, 0.98) 0%, rgba(18, 20, 26, 0.99) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.55);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.eld-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.eld-modal-title {
+  margin: 0;
+  font-family: Oswald, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: none;
+  color: #fff;
+}
+
+.eld-modal-close {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.eld-modal-close:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.eld-modal-body {
+  padding: 16px 18px 18px;
+  font-family: 'Droid Sans', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Lightbox image (composant Img) — au-dessus des autres modales (ex. PayDunya) */
+.eld-modal-root--lightbox {
+  z-index: 10060;
+}
+
+.eld-modal-dialog--lightbox {
+  max-width: min(92vw, 56rem);
+  max-height: 90vh;
+  width: auto;
+  overflow: auto;
+}
+
+.eld-img-lightbox {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 14px;
+}
+
+.eld-img-lightbox__img {
+  display: block;
+  max-width: 100%;
+  max-height: min(72vh, 640px);
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.eld-img-lightbox__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+}
+
+.eld-img-lightbox__btn {
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  background: #c9f562;
+  color: #1a1c22;
+  transition: filter 0.15s ease;
+}
+
+.eld-img-lightbox__btn:hover {
+  filter: brightness(1.06);
+}
+
+.eld-img-lightbox__link {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.88);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.eld-img-lightbox__link:hover {
+  color: #fff;
+}
+
+/* Vignettes cliquables dans les panneaux (NavItemModal) */
+.eld-nav-img--clickable {
+  cursor: zoom-in;
+}
+
+.eld-nav-img--clickable:focus-visible {
+  outline: 2px solid rgba(201, 245, 98, 0.85);
+  outline-offset: 2px;
+}
+
+/* Modale paiement : pas de défilement interne ; image contenue dans la hauteur utile */
+.eld-modal-dialog:has(.eld-pay-layout) {
+  max-width: min(96vw, 90rem);
+  max-height: 90vh;
+  width: max-content;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.eld-modal-dialog:has(.eld-pay-layout) .eld-modal-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.eld-pay-layout {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 18px;
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: 100%;
+}
+
+.eld-pay-media {
+  flex: 0 1 auto;
+  line-height: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.eld-pay-formation-img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: min(100%, calc(96vw - 20rem));
+  max-height: min(58vh, calc(90vh - 11rem));
+  object-fit: contain;
+}
+
+.eld-pay-copy {
+  flex: 1 1 16rem;
+  min-width: min(100%, 240px);
+  max-width: 22rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 0;
+}
+
+.eld-pay-intro {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.eld-pay-intro__title {
+  margin: 0 0 6px;
+}
+
+.eld-pay-intro__price {
+  margin: 0 0 10px;
+}
+
+.eld-pay-meta {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 12px;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.eld-pay-meta dt {
+  margin: 0;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.eld-pay-meta dd {
+  margin: 0;
+}
+
+.eld-pay-price {
+  color: #c9f562;
+  font-weight: 700;
+}
+
+.eld-pay-description {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  margin: 0;
+  padding-right: 4px;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.eld-pay-description p {
+  margin: 0 0 10px;
+}
+
+.eld-pay-description p:last-child {
+  margin-bottom: 0;
+}
+
+.eld-pay-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+.eld-pay-btn {
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background 0.15s ease, filter 0.15s ease;
+}
+
+.eld-pay-btn--ghost {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.eld-pay-btn--primary {
+  background: #c9f562;
+  color: #1a1c22;
+}
+
+.eld-pay-btn--primary:hover {
+  filter: brightness(1.05);
+}
+
+@media (max-width: 640px) {
+  .eld-pay-layout {
+    flex-direction: column;
+    align-items: stretch;
+    overflow: hidden;
+  }
+
+  .eld-pay-formation-img {
+    max-width: 100%;
+    max-height: min(42vh, calc(90vh - 14rem));
+  }
+
+  .eld-pay-copy {
+    max-width: none;
+  }
+
+  .eld-modal-dialog:has(.eld-pay-layout) {
+    width: 100%;
+    max-width: min(96vw, 26rem);
+  }
+}
