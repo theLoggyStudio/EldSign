@@ -756,18 +756,43 @@ footer .privacy {
   color: #949394;
 }
 
-footer .soc-ico {
+footer .footer-loggpatient {
   position: absolute;
   right: 56px;
-  top: 9px;
+  top: 0;
+  font: 13px/43px 'Droid Sans', sans-serif;
+  color: #949394;
 }
 
-footer .soc-ico li {
-  float: left;
-  margin-left: 10px;
+footer a.footer-loggpatient:hover {
+  color: #fff;
 }
 
-footer .soc-ico li a {
+#contacts .contact-social-label {
+  margin: 0 0 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+#contacts .soc-ico--contact {
+  position: static;
+  right: auto;
+  top: auto;
+  margin: 0 0 8px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#contacts .soc-ico--contact li {
+  float: none;
+  margin-left: 0;
+}
+
+#contacts .soc-ico--contact li a {
   position: relative;
   top: 0;
   transition:
@@ -785,13 +810,13 @@ footer .soc-ico li a {
   text-decoration: none;
 }
 
-footer .soc-ico li a:hover {
-  top: -6px;
+#contacts .soc-ico--contact li a:hover {
+  top: -4px;
   background: rgba(255, 255, 255, 0.2);
   color: #fff;
 }
 
-footer .soc-ico__svg {
+.soc-ico__svg {
   width: 14px;
   height: 14px;
   display: block;
@@ -1331,8 +1356,8 @@ dl.address dd span {
   min-height: 0;
 }
 
-.eld-pay-copy--qrcodes {
-  max-width: min(100%, 30rem);
+.eld-pay-copy--whatsapp {
+  max-width: min(100%, 26rem);
 }
 
 .eld-pay-intro {
@@ -1398,9 +1423,6 @@ dl.address dd span {
 .eld-pay-whatsapp-block {
   flex-shrink: 0;
   text-align: center;
-  padding-bottom: 4px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  margin-bottom: 4px;
 }
 
 .eld-pay-whatsapp-block__label {
@@ -1419,9 +1441,18 @@ dl.address dd span {
   color: rgba(255, 255, 255, 0.62);
 }
 
-.eld-pay-qr__frame--whatsapp {
-  min-height: auto;
+.eld-pay-whatsapp-qr-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 14px;
+  border-radius: 8px;
+  background: #fff;
+  line-height: 0;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .eld-pay-whatsapp-qr-svg {
@@ -1437,77 +1468,6 @@ dl.address dd span {
   margin-top: 12px;
   font-size: 0.82rem;
   font-weight: 600;
-}
-
-.eld-pay-qr-section-title {
-  margin: 14px 0 0;
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  color: rgba(255, 255, 255, 0.45);
-}
-
-.eld-pay-qrcodes {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  flex-shrink: 0;
-}
-
-.eld-pay-qr {
-  margin: 0;
-  text-align: center;
-}
-
-.eld-pay-qr__label {
-  margin: 0 0 8px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: rgba(255, 255, 255, 0.55);
-}
-
-.eld-pay-qr__frame {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  border-radius: 8px;
-  background: #fff;
-  line-height: 0;
-  min-height: 132px;
-}
-
-.eld-pay-qr__img {
-  display: block;
-  width: auto;
-  height: auto;
-  max-width: 140px;
-  max-height: 140px;
-  object-fit: contain;
-}
-
-.eld-pay-qr__missing {
-  margin: 0;
-  padding: 12px 10px;
-  font-size: 0.72rem;
-  line-height: 1.45;
-  color: rgba(255, 255, 255, 0.55);
-  border: 1px dashed rgba(255, 255, 255, 0.22);
-  border-radius: 8px;
-  min-height: 132px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.eld-pay-qr__code {
-  font-size: 0.68rem;
-  color: rgba(201, 245, 98, 0.9);
-  word-break: break-all;
 }
 
 .eld-pay-qr-hint {
@@ -1565,10 +1525,6 @@ dl.address dd span {
 
   .eld-pay-copy {
     max-width: none;
-  }
-
-  .eld-pay-qrcodes {
-    grid-template-columns: 1fr;
   }
 
   .eld-modal-dialog:has(.eld-pay-layout) {
