@@ -15,7 +15,7 @@ import { DynamicBackground } from './items/DynamicBackground'
 import { NavItem } from './items/NavItem'
 import { Article } from './items/Article'
 import { BackgroundClickPlane } from './items/BackgroundClickPlane'
-import { PaydunyaPayModal } from './items/PaydunyaPayModal'
+import { FormationPaymentModal } from './items/FormationPaymentModal'
 import { NavItemModal } from './items/NavItemModal'
 import { PieceItem, PieceStagger } from './items/PieceReveal'
 import { TextImagePageContent } from './items/TextImagePageContent'
@@ -707,7 +707,7 @@ export const App = () => {
         </motion.footer>
       </div>
 
-      <PaydunyaPayModal
+      <FormationPaymentModal
         open={payModal != null}
         onClose={() => setPayModal(null)}
         formationTitle={payModal?.title ?? ''}
