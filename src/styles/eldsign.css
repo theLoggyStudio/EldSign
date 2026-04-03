@@ -123,7 +123,7 @@ p,
   position: absolute;
   left: 0;
   top: 0;
-  z-index: 2;
+  z-index: 3;
   min-width: 940px;
   min-height: 0;
   box-sizing: border-box;
@@ -858,7 +858,7 @@ dl.address dd span {
   isolation: isolate;
 }
 
-/* Voile visuel uniquement ; les clics passent vers .eld-bg-click-plane (z-index 1) sous #glob */
+/* Voile visuel uniquement ; les clics passent vers .eld-bg-click-plane sous #glob */
 #bgStretch::after {
   content: '';
   position: absolute;
@@ -868,11 +868,49 @@ dl.address dd span {
   background: var(--eldsign-bg-photo-tint);
 }
 
-/* Clic + molette sur le fond : sous #glob (z-index 2), au-dessus de #bgStretch (0) */
-.eld-bg-click-plane {
+/* Fond immersif : flou sur les calques (image nette au-dessus via .immersive-wallpaper-layer) */
+#bgStretch.immersive-bg--blur .bg-inner {
+  filter: blur(18px) brightness(0.7);
+  transform: scale(1.07);
+  transition:
+    filter 0.55s ease,
+    transform 0.55s ease;
+}
+
+#bgStretch:not(.immersive-bg--blur) .bg-inner {
+  transition:
+    filter 0.45s ease,
+    transform 0.45s ease;
+}
+
+/* Image actuelle, taille « normale » (contenue dans l’écran), au-dessus du fond flou */
+.immersive-wallpaper-layer {
   position: fixed;
   inset: 0;
   z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(16px, 5vw, 56px);
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.immersive-wallpaper-layer__img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.5);
+}
+
+/* Clic + molette : au-dessus du fond net immersif, sous #glob */
+.eld-bg-click-plane {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
   pointer-events: auto;
   cursor: pointer;
   background: transparent;

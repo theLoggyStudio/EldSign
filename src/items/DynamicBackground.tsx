@@ -8,12 +8,15 @@ export type DynamicBackgroundProps = {
   urls: string[]
   activeIndex: number
   onActiveIndexChange: (index: number) => void
+  /** Mode immersif : flou sur les calques du fond. */
+  immersiveBlur?: boolean
 }
 
 export const DynamicBackground = ({
   urls,
   activeIndex,
   onActiveIndexChange,
+  immersiveBlur = false,
 }: DynamicBackgroundProps) => {
   const [baseIndex, setBaseIndex] = useState(0)
   const [overlayIndex, setOverlayIndex] = useState<number | null>(null)
@@ -96,6 +99,7 @@ export const DynamicBackground = ({
     return (
       <div
         id="bgStretch"
+        className={immersiveBlur ? 'immersive-bg--blur' : undefined}
         aria-hidden
         role="presentation"
       >
@@ -113,6 +117,7 @@ export const DynamicBackground = ({
   return (
     <div
       id="bgStretch"
+      className={immersiveBlur ? 'immersive-bg--blur' : undefined}
       aria-hidden
       role="presentation"
     >

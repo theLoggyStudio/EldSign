@@ -8,6 +8,7 @@ import { getSeminaireBlocks } from './seminaireContent'
 import { BACKGROUND_FALLBACK, BACKGROUND_URLS } from './backgroundUrls'
 import { FORMATION_ENTRIES } from './formationUrls'
 import { ImmersiveLogoOverlay, IMMERSIVE_UI_OUT_S } from './items/ImmersiveLogoOverlay'
+import { ImmersiveWallpaperLayer } from './items/ImmersiveWallpaperLayer'
 import { pickRandomLogoUrl } from './logoUrls'
 import { BackgroundThumbPager } from './items/BackgroundThumbPager'
 import { DynamicBackground } from './items/DynamicBackground'
@@ -106,6 +107,12 @@ export const App = () => {
   const genieCivilBlocks = useMemo(() => getGenieCivilBlocks(), [])
   const seminaireBlocks = useMemo(() => getSeminaireBlocks(), [])
 
+  const immersiveWallpaperUrl = useMemo(() => {
+    const n = BACKGROUND_URLS.length
+    if (n === 0) return null
+    return BACKGROUND_URLS[((bgIndex % n) + n) % n]
+  }, [bgIndex])
+
   useEffect(() => {
     const onHash = () => setRoute(parseHash())
     window.addEventListener('hashchange', onHash)
@@ -168,12 +175,20 @@ export const App = () => {
           urls={BACKGROUND_URLS}
           activeIndex={bgIndex}
           onActiveIndexChange={setBgIndex}
+          immersiveBlur={immersiveOpen}
         />
       ) : (
-        <div id="bgStretch" aria-hidden role="presentation">
+        <div
+          id="bgStretch"
+          className={immersiveOpen ? 'immersive-bg--blur' : undefined}
+          aria-hidden
+          role="presentation"
+        >
           <div className="bg-inner bg-layer-base" style={{ backgroundImage: BACKGROUND_FALLBACK }} />
         </div>
       )}
+
+      <ImmersiveWallpaperLayer open={immersiveOpen} imageUrl={immersiveWallpaperUrl} />
 
       <BackgroundClickPlane onBackgroundClick={toggleImmersiveBackground} />
 
