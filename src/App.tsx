@@ -212,7 +212,9 @@ export const App = () => {
         >
           <h1 className="eldsign-logo">
             <a href="#/home" onClick={() => go('home')} className="eldsign-logo__link">
+            <center>
               <img src={eldNavbarLogo} alt="EldSign" className="eldsign-logo__img" decoding="async" />
+            </center>
             </a>
           </h1>
           <nav>
