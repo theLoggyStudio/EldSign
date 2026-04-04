@@ -228,7 +228,7 @@ p,
 .eldsign-logo__img {
   display: block;
   width: auto;
-  max-width: min(210px, 72vw);
+  max-width: min(350px, 72vw);
   height: auto;
   max-height: 72px;
   object-fit: contain;
