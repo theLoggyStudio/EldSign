@@ -20,6 +20,7 @@ import { NavItemModal } from './items/NavItemModal'
 import { PieceItem, PieceStagger } from './items/PieceReveal'
 import { TextImagePageContent } from './items/TextImagePageContent'
 import { getHomeAcceuilleBlocks } from './homeAcceuille'
+import { VentePage } from './itemsVente/VentePage'
 
 type RouteId =
   | 'home'
@@ -28,6 +29,7 @@ type RouteId =
   | 'genie_civil'
   | 'seminaire'
   | 'formations'
+  | 'vente'
   | 'contacts'
   | 'privacy'
   | 'readmore'
@@ -42,6 +44,7 @@ function parseHash(): RouteId {
     'genie_civil',
     'seminaire',
     'formations',
+    'vente',
     'contacts',
     'privacy',
     'readmore',
@@ -57,6 +60,7 @@ const NAV_LINKS: { to: RouteId; label: string }[] = [
   { to: 'genie_civil', label: 'génie civil' },
   { to: 'seminaire', label: 'séminaire' },
   { to: 'formations', label: 'Nos formations' },
+  { to: 'vente', label: 'Vente' },
   { to: 'contacts', label: 'contact' },
 ]
 
@@ -496,6 +500,23 @@ export const App = () => {
                       )}
                     </ul>
                   </div>
+                </NavItemModal>
+              )}
+
+              {route === 'vente' && (
+                <NavItemModal
+                  panelKey="vente"
+                  id="vente"
+                  initial={panelSlide.initial}
+                  animate={panelSlide.animate}
+                  exit={panelSlide.exit}
+                  transition={panelTransition}
+                >
+                  <PieceStagger motionKey="vente-stagger">
+                    <PieceItem>
+                      <VentePage />
+                    </PieceItem>
+                  </PieceStagger>
                 </NavItemModal>
               )}
 
