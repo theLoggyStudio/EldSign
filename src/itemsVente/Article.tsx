@@ -12,6 +12,8 @@ export type VenteArticleData = {
 export type VenteArticleProps = {
   item: VenteArticleData
   onOpen: (item: VenteArticleData) => void
+  selected?: boolean
+  onToggleSelect?: (itemId: string) => void
 }
 
 const rowStyle: CSSProperties = {
@@ -46,11 +48,20 @@ const openButtonStyle: CSSProperties = {
   fontWeight: 700,
 }
 
-export const Article = ({ item, onOpen }: VenteArticleProps) => {
+export const Article = ({ item, onOpen, selected = false, onToggleSelect }: VenteArticleProps) => {
   return (
     <article style={rowStyle}>
       <img src={item.imageUrl} alt={item.title} style={imageStyle} loading="lazy" decoding="async" />
       <div style={{ display: 'grid', gap: 10, alignContent: 'start' }}>
+        <label style={{ display: 'inline-flex', gap: 8, alignItems: 'center', fontWeight: 600 }}>
+          <input
+            type="checkbox"
+            checked={selected}
+            onChange={() => onToggleSelect?.(item.id)}
+            aria-label={`Selectionner ${item.title}`}
+          />
+          Selection multiple
+        </label>
         <h3 style={{ margin: 0, fontSize: 28 }}>{item.title}</h3>
         {item.subtitle ? <p style={{ margin: 0, fontSize: 16 }}>{item.subtitle}</p> : null}
         <p style={{ margin: 0, fontSize: 22, fontWeight: 700 }}>{item.price}</p>
