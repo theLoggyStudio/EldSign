@@ -27,5 +27,5 @@ export function parseTextImageSegments(raw: string): TextImageSegment[] {
 export function altFromImportKey(importKey: string): string {
   const base = importKey.replace(/^.*[/\\]/, '').replace(/\.[^.]+$/i, '')
   const cleaned = base.replace(/\s+/g, ' ').trim()
-  return cleaned ? `ELDSIGN — ${cleaned}` : 'ELDSIGN'
+  return cleaned ? `ELDSIGN : ${cleaned}` : 'ELDSIGN'
 }

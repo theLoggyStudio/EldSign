@@ -46,15 +46,15 @@ Compréhension du contexte local
 
 ::briefcase:: Nos activités
 
-1. Architecture & design — création de plans personnalisés adaptés aux besoins du client.
+1. Architecture & design : création de plans personnalisés adaptés aux besoins du client.
 
-2. Génie civil — études techniques pour assurer la solidité et la durabilité des constructions.
+2. Génie civil : études techniques pour assurer la solidité et la durabilité des constructions.
 
-3. Suivi de projet — gestion et supervision complète des chantiers.
+3. Suivi de projet : gestion et supervision complète des chantiers.
 
-4. Visualisation 3D — projection réaliste des projets avant réalisation.
+4. Visualisation 3D : projection réaliste des projets avant réalisation.
 
-5. Formation professionnelle — transmission de compétences en architecture et logiciels spécialisés.
+5. Formation professionnelle : transmission de compétences en architecture et logiciels spécialisés.
 
 [[IMAGE]]
 

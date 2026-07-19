@@ -92,7 +92,7 @@ const panelTransition = {
 /** Texte détaillé des formations : modale = intégral ; liste = extrait (`detailsMaxWords` sur `Article`). */
 const FORMATION_CARD_DETAILS =
   'Durée et modalités à préciser selon votre besoin (présentiel, distanciel ou mixte).\n\n' +
-  'Public visé : professionnels du secteur — programme et objectifs pédagogiques à personnaliser.'
+  'Public visé : professionnels du secteur : programme et objectifs pédagogiques à personnaliser.'
 
 const FORMATION_DETAILS_PREVIEW_MAX_WORDS = 18
 
@@ -537,7 +537,7 @@ export const App = () => {
                       <PieceItem>
                         <iframe
                           className="google_map"
-                          title="Carte — ELDSIGN, Dakar"
+                          title="Carte : ELDSIGN, Dakar"
                           width={460}
                           height={238}
                           loading="lazy"

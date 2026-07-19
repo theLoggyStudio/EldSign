@@ -17,7 +17,7 @@ avant memem de commencer je tinvite a lire "C:\Users\jessy\OneDrive\Dokumente\el
 ## 3. Évolution des Composants (Principe d'Extension)
 - **Modification au lieu de Création** : Si tu as besoin d'une variante d'un élément, **modifie le fichier existant** dans `src/items`.
 - **Props Optionnelles (?)** : Ajoute les nouvelles fonctionnalités (ex: pagination, validation) de manière optionnelle pour ne pas casser les autres instances du projet.
-- **Non-Breaking** : L'élément doit rester rétrocompatible par défaut.
+- **Non-Breaaking** : L'élément doit rester rétrocompatible par défaut.
 
 ## 4. Gestion des Données et États
 - **Mises à jour Incrémentales** : Pour les listes/tableaux, ajoute les données au tableau originel via `[...prev, ...next]` sans réinitialiser l'état global.

@@ -16,11 +16,11 @@ const imageModules = import.meta.glob('../Assets/Architecture/**/*.{jpeg,jpg,png
  * Images : Assets/Architecture (ordre alphabétique). Chaque [[IMAGE]] = photo suivante.
  * Ajoutez des .jpeg / .png dans ce dossier et, si besoin, plus de marqueurs dans un .md local.
  */
-export const ARCHITECTURE_FALLBACK_TEXT = `::architecture:: Architecture — concevoir des lieux adaptés au contexte
+export const ARCHITECTURE_FALLBACK_TEXT = `::architecture:: Architecture : concevoir des lieux adaptés au contexte
 
 Le service d’architecture d’ELDSIGN Architectes couvre l’ensemble du cycle de conception : de la première esquisse à la livraison d’un dossier cohérent pour les entreprises et les administrations. Nous travaillons à Dakar et en Afrique de l’Ouest avec une exigence double : répondre aux besoins du client et respecter le climat, les usages et les contraintes du territoire sénégalais.
 
-Notre approche ne se limite pas au dessin : nous structurons le projet pour qu’il soit lisible par tous les intervenants — maître d’ouvrage, bureaux d’études, entreprises — et pour que les choix formels (volumes, matériaux, ouvertures) soient toujours reliés à des objectifs de confort, de coût et de durabilité.
+Notre approche ne se limite pas au dessin : nous structurons le projet pour qu’il soit lisible par tous les intervenants : maître d’ouvrage, bureaux d’études, entreprises : et pour que les choix formels (volumes, matériaux, ouvertures) soient toujours reliés à des objectifs de confort, de coût et de durabilité.
 
 [[IMAGE]]
 
@@ -108,7 +108,7 @@ Pour les opérations urgentes, nous définissons un planning réaliste avec des 
 
 ::handshake:: Pourquoi confier votre projet architectural à ELDSIGN
 
-Vous bénéficiez d’une équipe habituée au contexte local, capable de relier conception architecturale, contraintes techniques et dialogue avec les entreprises. Nous privilégions la clarté des documents, l’écoute et la pédagogie — du premier croquis à la réception des travaux.
+Vous bénéficiez d’une équipe habituée au contexte local, capable de relier conception architecturale, contraintes techniques et dialogue avec les entreprises. Nous privilégions la clarté des documents, l’écoute et la pédagogie : du premier croquis à la réception des travaux.
 
 [[IMAGE]]
 
@@ -118,7 +118,7 @@ Expliquez-nous votre terrain, votre programme et vos priorités : nous vous prop
 
 ::arrow:: Page Contact pour prendre rendez-vous ou demander un devis indicatif.
 
-::phone:: +221 77 462 17 25 · +221 70 898 44 43 — ELDSIGN, Dakar.`
+::phone:: +221 77 462 17 25 · +221 70 898 44 43 : ELDSIGN, Dakar.`
 
 export type ArchitectureBlock = FolderContentBlock
 

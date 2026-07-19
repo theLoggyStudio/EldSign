@@ -13,14 +13,14 @@ const imageModules = import.meta.glob('../Assets/Acceuille/**/*.{jpeg,jpg,png,gi
 }) as Record<string, string>
 
 /** Texte par défaut si aucun .txt / .md dans Acceuille. Titres : `::clef::` (ProseWithIcons). */
-export const HOME_ACCEUILLE_FALLBACK_TEXT = `ELDSIGN Architectes — Donner vie à vos projets, de l'idée à la réalisation
+export const HOME_ACCEUILLE_FALLBACK_TEXT = `ELDSIGN Architectes : Donner vie à vos projets, de l'idée à la réalisation
 
 Basée à Dakar (Liberté 5, en face de la clinique Raby), ELDSIGN est un cabinet d'architecture, de génie civil et d'accompagnement de projets. Nous sécurisons aussi vos parcours de signature électronique et formons aux logiciels du bâtiment (AutoCAD, Revit, ArchiCAD, SketchUp, etc.).
 
 [[IMAGE]]
 
 ::pin:: Localisation
-Quartier Liberté 5 — repère : clinique Raby — Dakar. Recherche conseillée sur les cartes : « ELDSIGN Liberté 5 clinique Raby Dakar ».
+Quartier Liberté 5 : repère : clinique Raby : Dakar. Recherche conseillée sur les cartes : « ELDSIGN Liberté 5 clinique Raby Dakar ».
 
 ::build:: Notre métier
 Conception architecturale, modélisation et animation 3D, études techniques (structure, stabilité), permis de construire, suivi de chantier, devis et accompagnement projet. Formation professionnelle, conseil technique et projets de construction complets : une offre hybride BTP, formation et consulting.
@@ -39,7 +39,7 @@ Entreprise dakaroise, secteur BTP / architecture, active notamment via la format
 [[IMAGE]]
 
 ::globe:: Vision
-Architecture moderne ancrée dans le contexte local, démarches durables, solutions accessibles et rigoureuses — de la conception à la réception.
+Architecture moderne ancrée dans le contexte local, démarches durables, solutions accessibles et rigoureuses : de la conception à la réception.
 
 ::handshake:: Pourquoi nous choisir
 Expertise locale, accompagnement de bout en bout, outils numériques (3D, maquette virtuelle), double compétence signature en ligne + montée en compétences logicielles.

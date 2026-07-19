@@ -15,7 +15,7 @@ const imageModules = import.meta.glob('../Assets/Genie_civil/**/*.{jpeg,jpg,png,
 /**
  * Images : Assets/Genie_civil (ordre alphabétique). Chaque [[IMAGE]] = photo suivante.
  */
-export const GENIE_CIVIL_FALLBACK_TEXT = `::genie:: Génie civil — solidité, durabilité et sécurité des ouvrages
+export const GENIE_CIVIL_FALLBACK_TEXT = `::genie:: Génie civil : solidité, durabilité et sécurité des ouvrages
 
 Le génie civil est le socle technique de tout projet de construction : fondations, structure porteuse, stabilité globale, reprise des charges, interfaces avec le sol et parfois avec les réseaux. Chez ELDSIGN Architectes, nous portons une attention constante à la cohérence entre l’intention architecturale et la réalité du calcul et du chantier, pour que le bâtiment reste sûr et durable dans le temps.
 
@@ -59,7 +59,7 @@ Conseil sur les choix de systèmes porteurs (portiques, voiles, planchers) et su
 
 Vérifications de stabilité provisoire ou de phasage lorsque le chantier impose des étapes critiques.
 
-Appui sur la reprise d’ouvrages existants : renforts, sous-œuvres, ouvertures dans des murs porteurs — toujours dans le respect des investigations et des prescriptions de calcul.
+Appui sur la reprise d’ouvrages existants : renforts, sous-œuvres, ouvertures dans des murs porteurs : toujours dans le respect des investigations et des prescriptions de calcul.
 
 La liste exacte des missions est formalisée au contrat pour correspondre au niveau de risque et à la réglementation applicable.
 
@@ -109,7 +109,7 @@ Les études de génie civil sont souvent sur le chemin critique : sans structure
 
 ::handshake:: Pourquoi nous confier la dimension « technique lourde » de votre projet
 
-ELDSIGN combine culture de chantier, dialogue avec les architectes et souci pédagogique envers les porteurs de projet. Nous cherchons des solutions compréhensibles, réalisables et maintenables — pas seulement des lignes sur un plan.
+ELDSIGN combine culture de chantier, dialogue avec les architectes et souci pédagogique envers les porteurs de projet. Nous cherchons des solutions compréhensibles, réalisables et maintenables : pas seulement des lignes sur un plan.
 
 [[IMAGE]]
 
@@ -119,7 +119,7 @@ Que vous projetiez une construction neuve, une extension ou une reprise en sous-
 
 ::arrow:: Rendez-vous et demandes : page Contact du site.
 
-::phone:: +221 77 462 17 25 · +221 70 898 44 43 — ELDSIGN, Dakar.`
+::phone:: +221 77 462 17 25 · +221 70 898 44 43 : ELDSIGN, Dakar.`
 
 export type GenieCivilBlock = FolderContentBlock
 

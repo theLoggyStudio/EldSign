@@ -44,7 +44,7 @@ export const FormationPaymentModal = ({
     .filter(Boolean)
 
   return (
-    <Modal open={open} onClose={onClose} title="Contact — WhatsApp ELDSIGN">
+    <Modal open={open} onClose={onClose} title="Contact : WhatsApp ELDSIGN">
       <div className="eld-pay-layout">
         {imageUrl ? (
           <div className="eld-pay-media">
@@ -85,7 +85,7 @@ export const FormationPaymentModal = ({
           ) : null}
 
           <div className="eld-pay-whatsapp-block">
-            <p className="eld-pay-whatsapp-block__label">WhatsApp — ELDSIGN</p>
+            <p className="eld-pay-whatsapp-block__label">WhatsApp : ELDSIGN</p>
             <p className="eld-pay-whatsapp-block__sub">
               Scannez pour ouvrir la messagerie avec un texte déjà rédigé sur cette formation.
             </p>
